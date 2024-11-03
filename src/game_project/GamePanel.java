@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
     private long hitTime;
     private long time;
     private long hitCooldown; // เวลา cooldown หลังจากโดนชน
+    private int score;
 
     public GamePanel() {
         player = new Player();
@@ -53,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
         background.draw(g, getWidth(), getHeight());
         ground.draw(g);
         player.draw(g);
-
+        g.drawString("Score : "+score, 100,100);
         for (Obstacle obstacle : obstacles) {
             obstacle.draw(g);
         }
@@ -66,10 +67,6 @@ public class GamePanel extends JPanel implements Runnable {
         for (int i = obstacles.size() - 1; i >= 0; i--) {
             Obstacle obstacle = obstacles.get(i);
             obstacle.update();
-            
-            if (System.currentTimeMillis() - time < 2000) {
-                continue;
-            }
 
             // ตรวจสอบการชนระหว่างผู้เล่นกับอุปสรรค
             if (obstacle.checkCollision(player.getX(), player.getY(), player.getWidth(), player.getHeight())) {
@@ -78,6 +75,8 @@ public class GamePanel extends JPanel implements Runnable {
                     hitCooldown = System.currentTimeMillis(); // ตั้งเวลา cooldown
                     isHit = true;
                     hitTime = System.currentTimeMillis(); // เก็บเวลาที่เกิดการชน
+                }else{
+                    
                 }
             }
 
@@ -104,6 +103,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void run() {
         while (true) {
             update();
+            score++;
             try {
                 Thread.sleep(16);
             } catch (InterruptedException e) {

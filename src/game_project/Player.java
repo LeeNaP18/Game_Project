@@ -65,7 +65,7 @@ public class Player {
             g.drawRect(0, 0, 1000, 600);
         }
 
-        g.drawImage(playerImage, x, y, 250, 210, null);
+        g.drawImage(playerImage, x-100, y, 250, 210, null);
         health.draw(g, 20, 20); // วาดสุขภาพเหนือผู้เล่น
     }
 
@@ -88,11 +88,11 @@ public class Player {
     }
 
     public int getWidth() {
-        return playerImage.getWidth(null);
+        return 50;
     }
 
     public int getHeight() {
-        return playerImage.getHeight(null);
+        return 150;
     }
 }
 
