@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 public class Spirite_World_Jumper {
     
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Endless Runner");
+        JFrame frame = new JFrame("Spirite World Jumper");
         GamePanel gamePanel = new GamePanel();
         frame.add(gamePanel);
         frame.setSize(1000, 600);

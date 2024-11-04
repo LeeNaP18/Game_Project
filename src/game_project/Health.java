@@ -12,9 +12,11 @@ import java.awt.Graphics;
 
 public class Health {
     private int health;
+    private int initialHealth; // ตัวแปรเก็บสุขภาพเริ่มต้น
 
     public Health(int initialHealth) {
-        this.health = initialHealth;
+        this.initialHealth = initialHealth; // เก็บค่าพลังชีวิตเริ่มต้น
+        this.health = initialHealth; // ตั้งค่าพลังชีวิตให้เท่ากับค่าเริ่มต้น
     }
 
     public void reduceHealth(int amount) {
@@ -26,6 +28,11 @@ public class Health {
 
     public int getHealth() {
         return health;
+    }
+
+    // ฟังก์ชันรีเซ็ตสุขภาพ
+    public void resetHealth(int n) {
+        this.health = initialHealth; // รีเซ็ตสุขภาพกลับไปที่ค่าเริ่มต้น
     }
 
     public void draw(Graphics g, int x, int y) {

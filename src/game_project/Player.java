@@ -14,6 +14,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Player {
+
     private int x, y;
     private boolean jumping;
     private int jumpHeight;
@@ -65,7 +66,7 @@ public class Player {
             g.drawRect(0, 0, 1000, 600);
         }
 
-        g.drawImage(playerImage, x-100, y, 250, 210, null);
+        g.drawImage(playerImage, x - 100, y, 250, 210, null);
         health.draw(g, 20, 20); // วาดสุขภาพเหนือผู้เล่น
     }
 
@@ -77,6 +78,10 @@ public class Player {
 
     public int getHealth() {
         return health.getHealth(); // คืนค่าพลังชีวิตจาก Health class
+    }
+
+    public void resetHealth() {
+        health.resetHealth(100); // รีเซ็ตสุขภาพกลับไปที่ 100
     }
 
     public int getX() {
@@ -95,4 +100,3 @@ public class Player {
         return 150;
     }
 }
-

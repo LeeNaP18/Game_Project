@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Rich/Desktop/Game_Project/src/game_project/KeyInputs.java</file>
-            <file>file:/C:/Users/Rich/Desktop/Game_Project/src/game_project/Health.java</file>
-            <file>file:/C:/Users/Rich/Desktop/Game_Project/src/game_project/GamePanel.java</file>
-            <file>file:/C:/Users/Rich/Desktop/Game_Project/src/game_project/Ground.java</file>
-            <file>file:/C:/Users/Rich/Desktop/Game_Project/src/game_project/Background.java</file>
-            <file>file:/C:/Users/Rich/Desktop/Game_Project/src/game_project/Spirite_World_Jumper.java</file>
-            <file>file:/C:/Users/Rich/Desktop/Game_Project/src/game_project/Player.java</file>
-            <file>file:/C:/Users/Rich/Desktop/Game_Project/src/game_project/Obstacle.java</file>
+            <file>file:/C:/Users/victus/Documents/NetBeansProjects/Game_Project/src/game_project/Health.java</file>
+            <file>file:/C:/Users/victus/Documents/NetBeansProjects/Game_Project/src/game_project/Player.java</file>
+            <file>file:/C:/Users/victus/Documents/NetBeansProjects/Game_Project/src/game_project/Obstacle.java</file>
+            <file>file:/C:/Users/victus/Documents/NetBeansProjects/Game_Project/src/game_project/Background.java</file>
+            <file>file:/C:/Users/victus/Documents/NetBeansProjects/Game_Project/src/game_project/GamePanel.java</file>
+            <file>file:/C:/Users/victus/Documents/NetBeansProjects/Game_Project/src/game_project/Ground.java</file>
+            <file>file:/C:/Users/victus/Documents/NetBeansProjects/Game_Project/src/game_project/Spirite_World_Jumper.java</file>
         </group>
     </open-files>
 </project-private>
