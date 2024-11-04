@@ -20,7 +20,7 @@ public class Obstacle {
     private int width; // ความกว้างของอุปสรรค
     private int height; // ความสูงของอุปสรรค
     private double speed; // ความเร็วในการเคลื่อนที่ของอุปสรรค
-    private double maxSpeed = 20; // ความเร็วสูงสุด
+    private double maxSpeed = 40; // ความเร็วสูงสุด
     private double acceleration = 0.010; // อัตราเร่ง
 
     public Obstacle(int screenHeight, int desiredWidth, int desiredHeight,double speed) {

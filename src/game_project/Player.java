@@ -29,7 +29,7 @@ public class Player {
     public Player() {
         x = 50;
         y = groundY;
-        jumpHeight = -20;
+        jumpHeight = -18;
         playerImage = new ImageIcon(getClass().getResource("/img/chihiro1-1.gif")).getImage();
         health = new Health(100); // ใช้ Health class โดยกำหนดสุขภาพเริ่มต้นที่ 100
         hit = false;

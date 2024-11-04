@@ -34,18 +34,19 @@ public class GamePanel extends JPanel implements Runnable {
     private boolean isGameOver = false; // ตัวแปรสถานะเกมจบ
     private JButton startButton; // ปุ่มเริ่มเกม
     private JButton playAgainButton; // ปุ่มเล่นอีกครั้ง
-    private double gamespeed=1;
+    private double gamespeed = 1;
 
     public GamePanel() {
         player = new Player();
-        background = new Background();
+        background = new Background(25); // เปลี่ยนความเร็วที่ 25
         ground = new Ground(1250);
         obstacles = new ArrayList<>();
         random = new Random();
         gamespeed = 1;
+
         // สร้างปุ่มเริ่มเกม
         startButton = new JButton("Start");
-        startButton.setBounds(380, 250, 180, 70); // กำหนดตำแหน่งและขนาดของปุ่ม
+        startButton.setBounds(380, 250, 180, 70);
         startButton.setFont(new Font("Times New Roman", Font.BOLD, 40));
         startButton.setForeground(Color.WHITE);
         startButton.setFocusPainted(false);
@@ -55,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startGame(); // เรียกใช้เมธอดเพื่อเริ่มเกม
+                startGame();
             }
         });
 
@@ -70,16 +71,16 @@ public class GamePanel extends JPanel implements Runnable {
         playAgainButton.setFocusPainted(false);
         playAgainButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5, true));
         playAgainButton.setContentAreaFilled(false);
-        playAgainButton.setVisible(false); // ซ่อนปุ่มเริ่มต้น
+        playAgainButton.setVisible(false);
 
         playAgainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startGame(); // เรียกใช้เมธอดเพื่อเริ่มเกมใหม่
+                startGame();
             }
         });
 
-        this.add(playAgainButton); // เพิ่มปุ่ม "Play Again" ลงใน GamePanel
+        this.add(playAgainButton);
 
         addKeyListener(new KeyInputs(player));
         setFocusable(true);
@@ -89,17 +90,16 @@ public class GamePanel extends JPanel implements Runnable {
 
     private void startGame() {
         isGameStarted = true;
-        isGameOver = false; // Reset game over status
-        player.resetHealth(); // รีเซ็ตพลังชีวิตผู้เล่น
-        ground.reset(); // รีเซ็ตพื้นกลับไปที่ค่าเริ่มต้น
-        score = 0; // รีเซ็ตคะแนนกลับไปที่ 0
-        obstacles.clear(); // เคลียร์อุปสรรคเก่า
-        gamespeed=1;
-        obstacles = new ArrayList<>();
-        addObstacle(); // เพิ่มอุปสรรคใหม่
+        isGameOver = false;
+        player.resetHealth();
+        ground.reset();
+        score = 0;
+        obstacles.clear();
+        gamespeed = 1;
+        addObstacle();
         startButton.setVisible(false);
-        playAgainButton.setVisible(false); // ซ่อนปุ่ม "Play Again"
-        new Thread(this).start(); // เริ่มเธรดสำหรับการอัปเดตเกม
+        playAgainButton.setVisible(false);
+        new Thread(this).start();
     }
 
     private void addObstacle() {
@@ -122,21 +122,26 @@ public class GamePanel extends JPanel implements Runnable {
             obstacle.draw(g);
         }
 
-        // แสดงข้อความ "Game Over" เมื่อเกมจบ
         if (isGameOver) {
             g.setFont(new Font("Times New Roman", Font.BOLD, 70));
             g.setColor(Color.WHITE);
             g.drawString("Game Over", getWidth() / 2 - 180, getHeight() / 2 - 60);
-            playAgainButton.setVisible(true); // แสดงปุ่ม "Play Again"
+            playAgainButton.setVisible(true);
         }
     }
 
     public void update() {
-        if (isGameStarted && !isGameOver) { // อัพเดตเฉพาะเมื่อเกมเริ่มและยังไม่จบ
+        if (isGameStarted && !isGameOver) {
             player.update();
             ground.update();
-            setGamespeed(obstacles.get(0).getSpeed());
-            if(score%1500==0){
+            
+            // Check if obstacles list is not empty before accessing
+            if (!obstacles.isEmpty()) {
+                setGamespeed(obstacles.get(0).getSpeed());
+                background.setBackgroundImage((int) gamespeed); // เพิ่มการเปลี่ยนพื้นหลังตามความเร็วของเกม
+            }
+
+            if (score % 1500 == 0) {
                 addObstacle();
             }
 
@@ -167,10 +172,9 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            // เช็คว่าพลังชีวิตหมดหรือไม่
             if (player.getHealth() <= 0) {
-                isGameOver = true; // ตั้งค่าสถานะเกมจบ
-                isGameStarted = false; // หยุดเกม
+                isGameOver = true;
+                isGameStarted = false;
             }
 
             score++;

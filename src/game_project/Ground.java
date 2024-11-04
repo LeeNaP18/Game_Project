@@ -17,7 +17,7 @@ public class Ground {
     private Image groundImage;  
     private double x1, x2; // ใช้ double เพื่อให้การเคลื่อนไหวสมูทมากขึ้น  
     private double speed = 1.0; // ความเร็วเริ่มต้นเป็น double  
-    private double maxSpeed = 20.0; // ความเร็วสูงสุด  
+    private double maxSpeed = 40.0; // ความเร็วสูงสุด  
     private double acceleration = 0.010; // อัตราเร่ง  
     private int screenWidth; // ความกว้างหน้าจอ  
     private int groundHeight; // ความสูงของภาพพื้น  
