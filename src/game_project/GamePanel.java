@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
     private boolean isGameOver = false; // ตัวแปรสถานะเกมจบ
     private JButton startButton; // ปุ่มเริ่มเกม
     private JButton playAgainButton; // ปุ่มเล่นอีกครั้ง
+    private double gamespeed=1;
 
     public GamePanel() {
         player = new Player();
@@ -41,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
         ground = new Ground(1250);
         obstacles = new ArrayList<>();
         random = new Random();
-
+        gamespeed = 1;
         // สร้างปุ่มเริ่มเกม
         startButton = new JButton("Start");
         startButton.setBounds(380, 250, 180, 70); // กำหนดตำแหน่งและขนาดของปุ่ม
@@ -93,6 +94,8 @@ public class GamePanel extends JPanel implements Runnable {
         ground.reset(); // รีเซ็ตพื้นกลับไปที่ค่าเริ่มต้น
         score = 0; // รีเซ็ตคะแนนกลับไปที่ 0
         obstacles.clear(); // เคลียร์อุปสรรคเก่า
+        gamespeed=1;
+        obstacles = new ArrayList<>();
         addObstacle(); // เพิ่มอุปสรรคใหม่
         startButton.setVisible(false);
         playAgainButton.setVisible(false); // ซ่อนปุ่ม "Play Again"
@@ -100,7 +103,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void addObstacle() {
-        obstacles.add(new Obstacle(450, 100, 100));
+        obstacles.add(new Obstacle(450, 100, 100, gamespeed));
     }
 
     @Override
@@ -132,6 +135,10 @@ public class GamePanel extends JPanel implements Runnable {
         if (isGameStarted && !isGameOver) { // อัพเดตเฉพาะเมื่อเกมเริ่มและยังไม่จบ
             player.update();
             ground.update();
+            setGamespeed(obstacles.get(0).getSpeed());
+            if(score%1500==0){
+                addObstacle();
+            }
 
             for (int i = obstacles.size() - 1; i >= 0; i--) {
                 Obstacle obstacle = obstacles.get(i);
@@ -185,5 +192,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void setGamespeed(double gamespeed) {
+        this.gamespeed = gamespeed;
     }
 }

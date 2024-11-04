@@ -23,7 +23,7 @@ public class Obstacle {
     private double maxSpeed = 20; // ความเร็วสูงสุด
     private double acceleration = 0.010; // อัตราเร่ง
 
-    public Obstacle(int screenHeight, int desiredWidth, int desiredHeight) {
+    public Obstacle(int screenHeight, int desiredWidth, int desiredHeight,double speed) {
         // โหลดรูปภาพ
         this.image = new ImageIcon(getClass().getResource("/img/obstacle.png")).getImage();
 
@@ -34,7 +34,8 @@ public class Obstacle {
             this.height = desiredHeight; 
             
             // กำหนดตำแหน่งเริ่มต้น x ให้อยู่ที่นอกจอ (ทางขวา)
-            this.x = 1000; // ค่าตำแหน่งเริ่มต้นที่นอกจอ
+            int n = (int)(Math.random() * 2500) + 1000+(int)(150*this.speed);
+            this.x = n; // ค่าตำแหน่งเริ่มต้นที่นอกจอ
             // ตำแหน่ง y ให้สุ่มสูงจากพื้น
             this.y = screenHeight - height; // ใช้ตำแหน่ง y ที่จะอยู่บนพื้น
         } else {
@@ -45,7 +46,7 @@ public class Obstacle {
         this.image = image.getScaledInstance(desiredWidth, desiredHeight, Image.SCALE_SMOOTH);
         
         // ตั้งค่าความเร็วเริ่มต้น
-        this.speed = 1; // เริ่มต้นที่ 1
+        this.speed = speed; // เริ่มต้นที่ 1
     }
 
     public void update() {
@@ -59,7 +60,8 @@ public class Obstacle {
         
         // ถ้าอุปสรรคหลุดจากจอ ให้กลับไปที่นอกจอ
         if (this.x + this.width < 0) {
-            this.x = 1000; // กลับไปที่ตำแหน่งเริ่มต้นที่นอกจอ
+            int n = (int)(Math.random() * 1100) + 1000+(int)(150*this.speed);
+            this.x = n;
         }
     }
 
@@ -89,13 +91,17 @@ public class Obstacle {
     }
 
     // ฟังก์ชันสร้างอุปสรรคหลายตัว
-    public static Obstacle[] makeObstacles(int size, int screenHeight, int desiredWidth, int desiredHeight) {
-        Obstacle[] obstacles = new Obstacle[size];
-        for (int i = 0; i < size; i++) {
-            obstacles[i] = new Obstacle(screenHeight, desiredWidth, desiredHeight);
-            // ปรับตำแหน่งเริ่มต้นของแต่ละอุปสรรค
-            obstacles[i].x += i * 500; // ตั้งค่าให้ห่างกัน 500 หน่วย
-        }
-        return obstacles;
+//    public static Obstacle[] makeObstacles(int size, int screenHeight, int desiredWidth, int desiredHeight) {
+//        Obstacle[] obstacles = new Obstacle[size];
+//        for (int i = 0; i < size; i++) {
+//            obstacles[i] = new Obstacle(screenHeight, desiredWidth, desiredHeight);
+//            // ปรับตำแหน่งเริ่มต้นของแต่ละอุปสรรค
+//            obstacles[i].x += i * 500; // ตั้งค่าให้ห่างกัน 500 หน่วย
+//        }
+//        return obstacles;
+//    }
+
+    public double getSpeed() {
+        return speed;
     }
 }
