@@ -30,21 +30,25 @@ public class GamePanel extends JPanel implements Runnable {
     private long hitTime;
     private long hitCooldown;
     private int score = 0;
-    private boolean isGameStarted = false; // ตัวแปรสถานะการเริ่มเกม
-    private boolean isGameOver = false; // ตัวแปรสถานะเกมจบ
-    private JButton startButton; // ปุ่มเริ่มเกม
-    private JButton playAgainButton; // ปุ่มเล่นอีกครั้ง
+    private boolean isGameStarted = false;
+    private boolean isGameOver = false;
+    private JButton startButton;
+    private JButton playAgainButton;
     private double gamespeed = 1;
+    private NoFace noface; // เพิ่ม Noface เป็นตัวแปรใหม่
 
     public GamePanel() {
         player = new Player();
-        background = new Background(25); // เปลี่ยนความเร็วที่ 25
+        background = new Background(25); 
         ground = new Ground(1250);
         obstacles = new ArrayList<>();
         random = new Random();
         gamespeed = 1;
 
-        // สร้างปุ่มเริ่มเกม
+        // สร้างอินสแตนซ์ของ Noface และกำหนดตำแหน่งให้ยืนเฉยๆ ทางขวา
+        noface = new NoFace(1000, 240); 
+
+        // Create a game start button
         startButton = new JButton("Start");
         startButton.setBounds(380, 250, 180, 70);
         startButton.setFont(new Font("Times New Roman", Font.BOLD, 40));
@@ -63,7 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.add(startButton);
         setLayout(null);
 
-        // สร้างปุ่ม "Play Again"
+        // Create a "Play Again" button
         playAgainButton = new JButton("Play Again");
         playAgainButton.setBounds(350, 250, 280, 100);
         playAgainButton.setFont(new Font("Times New Roman", Font.BOLD, 48));
@@ -122,6 +126,9 @@ public class GamePanel extends JPanel implements Runnable {
             obstacle.draw(g);
         }
 
+        // วาด Noface ที่ตำแหน่งด้านขวาของหน้าต่าง
+        noface.draw(g);
+
         if (isGameOver) {
             g.setFont(new Font("Times New Roman", Font.BOLD, 70));
             g.setColor(Color.WHITE);
@@ -135,10 +142,9 @@ public class GamePanel extends JPanel implements Runnable {
             player.update();
             ground.update();
             
-            // Check if obstacles list is not empty before accessing
             if (!obstacles.isEmpty()) {
                 setGamespeed(obstacles.get(0).getSpeed());
-                background.setBackgroundImage((int) gamespeed); // เพิ่มการเปลี่ยนพื้นหลังตามความเร็วของเกม
+                background.setBackgroundImage((int) gamespeed);
             }
 
             if (score % 1500 == 0) {
@@ -161,6 +167,16 @@ public class GamePanel extends JPanel implements Runnable {
                 if (obstacle.getX() + obstacle.getWidth() < 0) {
                     obstacles.remove(i);
                     addObstacle();
+                }
+            }
+
+            // ตรวจสอบการชนกับ Noface
+            if (noface.checkCollision(player.getX(), player.getY(), player.getWidth(), player.getHeight())) {
+                if (player.getHealth() > 0 && (System.currentTimeMillis() - hitCooldown > 500)) {
+                    player.decreaseHealth();
+                    hitCooldown = System.currentTimeMillis();
+                    isHit = true;
+                    hitTime = System.currentTimeMillis();
                 }
             }
 

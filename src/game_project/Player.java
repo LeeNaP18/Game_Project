@@ -22,7 +22,7 @@ public class Player {
     private int gravity = 1;
     private int velocityY = 0;
     private final int groundY = 240;
-    private Health health; // ใช้ Health class แทนการใช้ int health
+    private PlayerHealth health; // ใช้ PlayerHealth แทน Health
     private boolean hit;
     private long hitTime; // ตัวแปรเก็บเวลาที่เกิดการชน
 
@@ -31,7 +31,7 @@ public class Player {
         y = groundY;
         jumpHeight = -18;
         playerImage = new ImageIcon(getClass().getResource("/img/chihiro1-1.gif")).getImage();
-        health = new Health(100); // ใช้ Health class โดยกำหนดสุขภาพเริ่มต้นที่ 100
+        health = new PlayerHealth(100); // ใช้ PlayerHealth โดยตั้งสุขภาพเริ่มต้นที่ 100
         hit = false;
     }
 
@@ -66,22 +66,22 @@ public class Player {
             g.drawRect(0, 0, 1000, 600);
         }
 
-        g.drawImage(playerImage, x - 100, y, 250, 210, null);
+        g.drawImage(playerImage, x - 100, y - 47, 350, 260, null);
         health.draw(g, 20, 20); // วาดสุขภาพเหนือผู้เล่น
     }
 
     public void decreaseHealth() {
-        health.reduceHealth(10); // เรียกใช้ฟังก์ชันจาก Health class
+        health.reduceHealth(10); // เรียกใช้ฟังก์ชันจาก PlayerHealth
         hit = true;
         hitTime = System.currentTimeMillis(); // เก็บเวลาที่เกิดการชน
     }
 
     public int getHealth() {
-        return health.getHealth(); // คืนค่าพลังชีวิตจาก Health class
+        return health.getHealth(); // คืนค่าพลังชีวิตจาก PlayerHealth
     }
 
     public void resetHealth() {
-        health.resetHealth(100); // รีเซ็ตสุขภาพกลับไปที่ 100
+        health.resetHealth(); // รีเซ็ตสุขภาพกลับไปที่ 100
     }
 
     public int getX() {

@@ -24,36 +24,34 @@ public class Ground {
     private int groundWidth; // ความกว้างของภาพพื้น  
 
     public Ground(int screenWidth) {  
-        // โหลดภาพพื้นจากโฟลเดอร์ img  
-        groundImage = new ImageIcon(getClass().getResource("/img/ground-1 (2).png")).getImage();  
-
-        // กำหนดค่าเริ่มต้นของ x1 และ x2  
+        // background image 
+        groundImage = new ImageIcon(getClass().getResource("/img/ground-1 (2).png")).getImage();
+        
         this.screenWidth = screenWidth;  
-        this.groundHeight = groundImage.getHeight(null); // เก็บความสูงของภาพพื้น
-        this.groundWidth = groundImage.getWidth(null); // เก็บความกว้างของภาพพื้น
+        this.groundHeight = groundImage.getHeight(null); // Store the height of the floor image
+        this.groundWidth = groundImage.getWidth(null); // Store the width of the background image
         x1 = 0;  
-        x2 = groundWidth; // ตั้งค่า x2 ให้ถัดจาก x1 เพื่อสร้างภาพลูป  
+        x2 = groundWidth; // Set x2 next to x1 to create a loop.
     }  
 
     public void update() {  
-        // เพิ่มความเร็วขึ้นเรื่อยๆ จนถึงความเร็วสูงสุด  
+        // Gradually increase speed until reaching maximum speed.
         if (speed < maxSpeed) {  
-            speed += acceleration; // เพิ่มความเร็วอย่างค่อยเป็นค่อยไป  
-        }  
-
-        // พิมพ์ค่าความเร็วในคอนโซลเพื่อดูการเปลี่ยนแปลง  
+            speed += acceleration; // Increase speed gradually
+        }
+        
         System.out.println("Current speed: " + speed);  
 
-        // เลื่อนตำแหน่ง x1 และ x2 ไปทางซ้ายตามความเร็ว  
+        // Move x1 and x2 to the left according to the velocity.
         x1 -= speed;  
         x2 -= speed;  
 
-        // ตรวจสอบว่าภาพแรกออกจากขอบจอซ้ายหรือยัง ถ้าออกแล้ว ให้รีเซ็ตตำแหน่งใหม่  
+        // Check if the first image exits the left edge of the screen. If it does, reset the position. 
         if (x1 + groundWidth <= 0) {  
             x1 = x2 + groundWidth;  
         }  
 
-        // ตรวจสอบภาพที่สองเช่นกัน  
+        // Check out the second picture as well. 
         if (x2 + groundWidth <= 0) {  
             x2 = x1 + groundWidth;  
         }  

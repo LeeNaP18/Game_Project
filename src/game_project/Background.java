@@ -21,13 +21,13 @@ public class Background {
     private Random random;
 
     public Background(int changeThresholdSpeed) {
-        // โหลดภาพพื้นหลังหลายภาพ
+        // Load multiple background images
         backgroundImages = new Image[] {
             new ImageIcon(getClass().getResource("/img/bg-3.jpg")).getImage(),
-            new ImageIcon(getClass().getResource("/img/bg-1.gif")).getImage() // รวมภาพพื้นหลัง
+            new ImageIcon(getClass().getResource("/img/bg-1.gif")).getImage()
         };
         
-        currentBackgroundImage = backgroundImages[0]; // ตั้งค่าเริ่มต้นเป็นภาพแรก
+        currentBackgroundImage = backgroundImages[0]; // Set the default as the first image.
         this.changeThresholdSpeed = changeThresholdSpeed;
         isChanged = false;
         random = new Random();

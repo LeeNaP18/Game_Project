@@ -3,43 +3,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package game_project;
+
 /**
  *
  * @author victus
  */
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
-public class Health {
-    private int health;
-    private int initialHealth; // ตัวแปรเก็บสุขภาพเริ่มต้น
+public abstract class Health {
+
+    protected int health;
+    protected int initialHealth; // Initial health storage variable
 
     public Health(int initialHealth) {
-        this.initialHealth = initialHealth; // เก็บค่าพลังชีวิตเริ่มต้น
-        this.health = initialHealth; // ตั้งค่าพลังชีวิตให้เท่ากับค่าเริ่มต้น
+        this.initialHealth = initialHealth;
+        this.health = initialHealth;
     }
 
-    public void reduceHealth(int amount) {
-        this.health -= amount;
-        if (this.health < 0) {
-            this.health = 0; // ไม่ให้ค่าพลังชีวิตต่ำกว่า 0
-        }
-    }
+    public abstract void reduceHealth(int amount); // Abstract methods for reducing health
+
+    public abstract void resetHealth(); // Abstract method for resetting health
 
     public int getHealth() {
         return health;
     }
 
-    // ฟังก์ชันรีเซ็ตสุขภาพ
-    public void resetHealth(int n) {
-        this.health = initialHealth; // รีเซ็ตสุขภาพกลับไปที่ค่าเริ่มต้น
-    }
-
     public void draw(Graphics g, int x, int y) {
         // แสดงพลังชีวิต
         g.setColor(Color.RED); // กำหนดสีของข้อความสุขภาพ
-        g.drawString("Health: " + health, x, y); // ปรับตำแหน่งตามที่ต้องการ
-        
+        Font font = new Font("Times New Roman", Font.BOLD, 12);
+        g.setFont(font);
+        g.drawString("Health: " + health, x, y);   // ปรับตำแหน่งตามที่ต้องการ
+
         // วาดแทบพลังชีวิต
         g.setColor(Color.GREEN); // สีเขียวสำหรับแทบพลังชีวิต
         g.fillRect(x, y + 10, health * 2, 20); // แทบพลังชีวิต (ปรับขนาดตามที่ต้องการ)
