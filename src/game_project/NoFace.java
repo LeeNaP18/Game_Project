@@ -26,9 +26,4 @@ public class NoFace {
     public void draw(Graphics g) {
         g.drawImage(nofaceImage, 620, 90, 430, 480, null);
     }
-
-    public boolean checkCollision(int playerX, int playerY, int playerWidth, int playerHeight) {
-        return playerX < x + 100 && playerX + playerWidth > x
-                && playerY < y + 150 && playerY + playerHeight > y;
-    }
 }

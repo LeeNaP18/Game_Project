@@ -170,16 +170,6 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            // Check for collision with Noface
-            if (noface.checkCollision(player.getX(), player.getY(), player.getWidth(), player.getHeight())) {
-                if (player.getHealth() > 0 && (System.currentTimeMillis() - hitCooldown > 500)) {
-                    player.decreaseHealth();
-                    hitCooldown = System.currentTimeMillis();
-                    isHit = true;
-                    hitTime = System.currentTimeMillis();
-                }
-            }
-
             if (isHit) {
                 this.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
                 if (System.currentTimeMillis() - hitTime > 300) {
