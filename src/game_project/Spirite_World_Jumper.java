@@ -22,7 +22,7 @@ public class Spirite_World_Jumper {
         frame.setResizable(false);
         frame.setVisible(true);
         
-        // เพิ่ม KeyListener สำหรับการควบคุม
+        // Added KeyListener for control
         frame.addKeyListener(new KeyInputs(gamePanel.getPlayer()));
     }
 }

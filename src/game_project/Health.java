@@ -31,18 +31,18 @@ public abstract class Health {
     }
 
     public void draw(Graphics g, int x, int y) {
-        // แสดงพลังชีวิต
-        g.setColor(Color.RED); // กำหนดสีของข้อความสุขภาพ
+        // Show life force
+        g.setColor(Color.RED); 
         Font font = new Font("Times New Roman", Font.BOLD, 12);
         g.setFont(font);
-        g.drawString("Health: " + health, x, y);   // ปรับตำแหน่งตามที่ต้องการ
+        g.drawString("Health: " + health, x, y);   
 
-        // วาดแทบพลังชีวิต
-        g.setColor(Color.GREEN); // สีเขียวสำหรับแทบพลังชีวิต
-        g.fillRect(x, y + 10, health * 2, 20); // แทบพลังชีวิต (ปรับขนาดตามที่ต้องการ)
+        // Draw almost life energy
+        g.setColor(Color.GREEN); 
+        g.fillRect(x, y + 10, health * 2, 20); 
 
-        // กรอบแทบพลังชีวิต
-        g.setColor(Color.BLACK); // กำหนดสีกรอบ
-        g.drawRect(x, y + 10, 200, 20); // วาดกรอบแทบพลังชีวิต
+        // Life force frame
+        g.setColor(Color.BLACK); 
+        g.drawRect(x, y + 10, 200, 20); 
     }
 }

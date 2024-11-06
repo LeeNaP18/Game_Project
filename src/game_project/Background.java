@@ -15,9 +15,9 @@ import java.util.Random;
 
 public class Background {
     private Image currentBackgroundImage;
-    private Image[] backgroundImages; // ภาพพื้นหลังหลายภาพ
-    private int changeThresholdSpeed; // ความเร็วที่ต้องการเพื่อเปลี่ยนฉากหลัง
-    private boolean isChanged; // ตรวจสอบว่าฉากหลังเปลี่ยนแล้วหรือยัง
+    private Image[] backgroundImages; // Multiple background images
+    private int changeThresholdSpeed; // The speed required to change the background
+    private boolean isChanged; // Check if the background has changed.
     private Random random;
 
     public Background(int changeThresholdSpeed) {
@@ -33,19 +33,19 @@ public class Background {
         random = new Random();
     }
 
-    // เพิ่มเมธอดเพื่อเปลี่ยนภาพพื้นหลัง
+    // Added a method to change the background image.
     public void setBackgroundImage(int speed) {
         if (speed >= changeThresholdSpeed && !isChanged) {
-            currentBackgroundImage = backgroundImages[1]; // เปลี่ยนเป็น bg-1
-            isChanged = true; // ตั้งค่าเป็นว่าพื้นหลังเปลี่ยนแล้ว
+            currentBackgroundImage = backgroundImages[1]; // Change to bg-1
+            isChanged = true; // Set as background changed
         } else if (speed < changeThresholdSpeed) {
-            currentBackgroundImage = backgroundImages[0]; // กลับไปเป็น bg-3
-            isChanged = false; // ตั้งค่าเป็นว่าพื้นหลังยังไม่ได้เปลี่ยน
+            currentBackgroundImage = backgroundImages[0]; // Back to bg-3
+            isChanged = false; // Set as if the background has not changed.
         }
     }
 
     public void updateBackground(int currentSpeed) {
-        // ไม่ต้องทำอะไรที่นี่ ถ้าคุณใช้เมธอด setBackgroundImage
+        
     }
 
     public void draw(Graphics g, int width, int height) {

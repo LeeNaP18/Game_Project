@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     private JButton startButton;
     private JButton playAgainButton;
     private double gamespeed = 1;
-    private NoFace noface; // เพิ่ม Noface เป็นตัวแปรใหม่
+    private NoFace noface; // Added Noface 
 
     public GamePanel() {
         player = new Player();
@@ -45,7 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
         random = new Random();
         gamespeed = 1;
 
-        // สร้างอินสแตนซ์ของ Noface และกำหนดตำแหน่งให้ยืนเฉยๆ ทางขวา
+        // Create an instance of Noface and position it to stand still on the right.
         noface = new NoFace(1000, 240); 
 
         // Create a game start button
@@ -126,7 +126,7 @@ public class GamePanel extends JPanel implements Runnable {
             obstacle.draw(g);
         }
 
-        // วาด Noface ที่ตำแหน่งด้านขวาของหน้าต่าง
+        // Draw Noface at the right position of the window.
         noface.draw(g);
 
         if (isGameOver) {
@@ -170,7 +170,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            // ตรวจสอบการชนกับ Noface
+            // Check for collision with Noface
             if (noface.checkCollision(player.getX(), player.getY(), player.getWidth(), player.getHeight())) {
                 if (player.getHealth() > 0 && (System.currentTimeMillis() - hitCooldown > 500)) {
                     player.decreaseHealth();

@@ -14,14 +14,14 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 public class Obstacle {
-    private Image image; // รูปภาพของอุปสรรค
-    private double x; // ตำแหน่ง x ของอุปสรรค
-    private int y; // ตำแหน่ง y ของอุปสรรค
-    private int width; // ความกว้างของอุปสรรค
-    private int height; // ความสูงของอุปสรรค
-    private double speed; // ความเร็วในการเคลื่อนที่ของอุปสรรค
-    private double maxSpeed = 40; // ความเร็วสูงสุด
-    private double acceleration = 0.010; // อัตราเร่ง
+    private Image image; 
+    private double x; 
+    private int y; 
+    private int width; 
+    private int height; 
+    private double speed; 
+    private double maxSpeed = 40; 
+    private double acceleration = 0.010; 
 
     public Obstacle(int screenHeight, int desiredWidth, int desiredHeight,double speed) {
         // Load image
@@ -50,15 +50,15 @@ public class Obstacle {
     }
 
     public void update() {
-        // เพิ่มความเร็วขึ้นเรื่อยๆ จนถึงความเร็วสูงสุด
+        // Gradually increase speed until reaching maximum speed.
         if (speed < maxSpeed) {
-            speed += acceleration; // เพิ่มความเร็วอย่างค่อยเป็นค่อยไป
+            speed += acceleration; // Increase speed gradually
         }
 
-        // เคลื่อนที่อุปสรรคไปทางซ้าย
+        // Move the obstacle to the left
         this.x -= speed;
         
-        // ถ้าอุปสรรคหลุดจากจอ ให้กลับไปที่นอกจอ
+        // If the obstacle falls off the screen, return to off-screen.
         if (this.x + this.width < 0) {
             int n = (int)(Math.random() * 1100) + 1000+(int)(150*this.speed);
             this.x = n;
@@ -66,9 +66,9 @@ public class Obstacle {
     }
 
     public void draw(Graphics g) {
-        // วาดอุปสรรคบนหน้าจอ
+        // Draw obstacles on the screen
         if (image != null) {
-            g.drawImage(image, (int)x, y, null); // วาดอุปสรรคด้วยขนาดที่กำหนด
+            g.drawImage(image, (int)x, y, null); // Draw obstacles with specified dimensions.
         } else {
             System.out.println("Image is null, cannot draw obstacle.");
         }
@@ -83,7 +83,7 @@ public class Obstacle {
     }
 
     public int getX() {
-        return (int)x; // เปลี่ยนให้คืนค่าเป็น int
+        return (int)x;
     }
 
     public int getWidth() {
